@@ -23,7 +23,7 @@
 
 
 *   **Type** -> *A*    
-*   **Nome** ->*Vote.simplon-raja.space*
+*   **Nom** ->*Vote.simplon-raja.space*
 *   **Adresse IP V4** -> *IP gateway* (pour déterminer l'adresse ip de la gateway il faut lancer le script de test Alfred sur terraform, puis on va sur Azure et on récupère l'adresse IP de la gateway et non de la VM, car la VM est liée à la gateway). 
 
 
@@ -40,7 +40,7 @@
         * pip3 install certbot-plugin-gandi
 
 
-*2.2 Après avoir téléchargé python3.10 sur Ubuntu 20.04, j'ai créé une fiche nano une avec main.py et l'autre gandi_api.py.* 
+*2.2 Après avoir téléchargé python3.10 sur Ubuntu 20.04, j'ai créé un fichier main.py et un autre gandi_api.py.* 
 
 
 1. Obtain a Gandi API token (see Gandi LiveDNS API)
@@ -52,13 +52,13 @@
 
 <img width="805" alt="compte et sécurité" src="https://user-images.githubusercontent.com/108053084/193401835-18a407b8-d80b-4bfa-ac4c-f814b8d4094d.PNG">
 
-* **Sécurité** -> Regénérer la clef d'Api.   (après avoir cliqué sur Regénérer la clef d'Api en haut, on vais obtenir un mot de passe qu'il faudra copier coller plus tard sur une fichier nano)
+* **Sécurité** -> Regénérer la clef d'Api. (Après avoir cliqué sur "Regénérer la clef d'Api", nous allons obtenir un mot de passe qu'il faudra copier coller plus tard sur un fichier)
 
 <img width="737" alt="sécurité" src="https://user-images.githubusercontent.com/108053084/193401945-861a6e5a-f8b2-41d6-8e41-052f49ba4fd2.PNG">
 
 *2. Install the plugin using pip install certbot-plugin-gandi*
 
-*3. Crèer une fichier nano gandi.ini*
+*3. Créer un fichier gandi.ini*
     
         * # live dns v5 api key
         dns_gandi_api_key= (mettre la clef d'Api que on avez genéré dans le premier point)
@@ -73,11 +73,11 @@
             *  certbot certonly --authenticator dns-gandi --dns-gandi-credentials gandi.ini -d vote.simplon-raja.space
         
         
-* Quand on à cet type d'erreur on fait la commande: 
+* Quand on a ce type d'erreur, on fait la commande: 
      
          *  cat /var/log/letsencrypt/letsencrypt.log  
          
-- [nous permettra de voir où est l'erreur, dans ce cas l'erreur était due au fait que je n'avais pas correctement pris la clef d'Api, j'ai par erreur appairé et collé mon mot de passe au lieu de prendre la clef d'Api.]
+- [nous permettra de voir où est l'erreur, dans ce cas-ci l'erreur était due au fait que je n'avais pas correctement pris la clef d'Api, j'ai par erreur copier et coller mon mot de passe au lieu de prendre la clef d'Api.]
 
 
 ## *Chapitre 3 - Charger le certificat dans Azure Application Gateway*
@@ -107,7 +107,7 @@
 <img width="943" alt="écouteurs" src="https://user-images.githubusercontent.com/108053084/193404376-99e59897-f0a3-4c6e-90b8-e8c49acd9e4d.PNG">
 
 
-* **Ajoutwr un écouteur**
+* **Ajouter un écouteur**
 * **Nom de l'écouteur** -> *listener*
 * **Adresse ip du front-end** -> *Publique*
 * **Protocole** -> *HTTPS*
@@ -120,14 +120,14 @@
      <img width="464" alt="wsl" src="https://user-images.githubusercontent.com/108053084/193405135-e515789b-78a2-4170-85f0-26c5ed9d347c.PNG">
 
 * **Home -> Raja -> certificat pfx -> ajouté**
-* **Mote de passe** -> "*****"
+* **Mot de passe** -> "*****"
 * **Paramètres supplémentaires** :
 -> *Type d'écouteur* -> *de base*
 -> *URL de la page d'erreurs*  -> *no*
             
      <img width="461" alt="wsl2" src="https://user-images.githubusercontent.com/108053084/193405188-559a2574-7cd1-4f9e-abcd-aca191ce183b.PNG">
      
-* Ajouté les règles -> *Règles echeminement*
+* Ajouter les règles -> *Règles d'acheminement*
 
      <img width="942" alt="règles" src="https://user-images.githubusercontent.com/108053084/193407224-c28cf981-a41a-43b3-9bc9-f83056a5fe36.PNG">
      
@@ -148,7 +148,7 @@
 **Ecouteurs** -> *HTTPS*
 **Cibles de back-end** ->
 **Type de cible** -> *Pool principal*
-**Cible de back-end** -> *beckend-pool* 
+**Cible de back-end** -> *backend-pool* 
 **Paramètres de back-end** -> *https-setting*
 
 
@@ -174,3 +174,15 @@
 *3 Vérifier que le certificat est dans le KeyVault en utilisant la CLI : az keyvault certificate show -v <vault-name> -n <certificate-name>*
     
     *  az keyvault certificate show --vault-name keyvaultrajach  -n certif
+
+
+
+    
+    
+
+
+
+
+
+
+
